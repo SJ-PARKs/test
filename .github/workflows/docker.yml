@@ -46,7 +46,7 @@ jobs:
           EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
         run: |
           # Create a tar of the repository
-          tar -czf deploy.tar.gz \
+          tar -czvf deploy.tar.gz \
           [ -d airflow/dags ] && tar_cmd+=" airflow/dags/"
           [ -d airflow/plugins ] && tar_cmd+=" airflow/plugins/"
           [ -f airflow/docker-compose.yml ] && tar_cmd+=" airflow/docker-compose.yml"
