@@ -7,7 +7,7 @@ on:
     paths:
       - 'airflow/dags/**'
       - 'airflow/plugins/**'
-      - 'airflow/docker-compose.yml'
+      - 'airflow/docker-compose.yaml'
       - 'airflow/compose/prod/traefik/**'
 
 env:
@@ -49,7 +49,7 @@ jobs:
           tar -czvf deploy.tar.gz \
                 airflow/dags/ \
                 airflow/plugins/ \
-                airflow/docker-compose.yml \
+                airflow/docker-compose.yaml \
                 airflow/compose/prod/traefik/ \
                 airflow/prod.yaml
 
@@ -81,8 +81,8 @@ jobs:
             rsync -av --delete ~/temp_deploy/airflow/plugins/ ~/projects/orangutan-stem/airflow/plugins/
 
             # Copy new docker-compose and traefik files only if they exist
-            if [ -f ~/temp_deploy/airflow/docker-compose.yml ]; then
-              cp ~/temp_deploy/airflow/docker-compose.yml ~/projects/orangutan-stem/airflow/
+            if [ -f ~/temp_deploy/airflow/docker-compose.yaml ]; then
+              cp ~/temp_deploy/airflow/docker-compose.yaml ~/projects/orangutan-stem/airflow/
             fi
             
             if [ -f ~/temp_deploy/airflow/prod.yaml ]; then
@@ -98,7 +98,7 @@ jobs:
             rm ~/airflow-deploy.tar.gz
 
             # Rebuild and restart containers
-            docker-compose -f docker-compose.yml -f prod.yaml down
-            docker-compose -f docker-compose.yml -f prod.yaml build
-            docker-compose -f docker-compose.yml -f prod.yaml up -d
+            docker-compose -f prod.yaml down
+            docker-compose -f prod.yaml build
+            docker-compose -f prod.yaml up -d
           EOF
