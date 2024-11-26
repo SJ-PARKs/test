@@ -99,8 +99,4 @@ jobs:
             rm ~/airflow-deploy.tar.gz
 
             # Rebuild and restart containers
-            cd $DEPLOY_DIR
-            docker compose -f prod.yaml down
-            docker compose -f prod.yaml build
-            docker compose -f prod.yaml up -d
           EOF
